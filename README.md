@@ -4,7 +4,7 @@
 
 ## Build
 
-Requires ROOT v6+ and CMake v3.21+ (see [here](#fetch-cmake-3-21) for updating CMake hints)
+Requires ROOT v6+ and CMake v3.21+ (see [here](#fetch-cmake-321) for updating CMake hints)
 
 Having checked out the repository in `/path/to/repo`:
 
