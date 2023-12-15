@@ -25,12 +25,10 @@ include(CPM)
 
 find_package(ROOT 6.10 REQUIRED)
 
-CPMFindPackage(
-    NAME fhicl_cpp_standalone
-    GIT_TAG develop
-    VERSION 4.18.01
-    GITHUB_REPOSITORY luketpickering/fhicl-cpp-standalone
-)
+find_package(fhicl_cpp_standalone QUIET)
+if(NOT fhicl_cpp_standalone_FOUND)
+  include(CheckFhiclCppStandalone)
+endif()
 
 ###### Compiler set up
 add_library(systematicstools_dependencies INTERFACE)
