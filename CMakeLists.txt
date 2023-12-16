@@ -25,9 +25,14 @@ include(CPM)
 
 find_package(ROOT 6.10 REQUIRED)
 
-find_package(fhicl_cpp_standalone QUIET)
-if(NOT fhicl_cpp_standalone_FOUND)
-  include(CheckFhiclCppStandalone)
+## Check if we have fhiclcpp from ups
+find_package(fhiclcpp QUIET)
+if(NOT fhiclcpp_FOUND)
+  ## Find fhicl_cpp_standalone
+  find_package(fhiclcppstandalone)
+else()
+  ## If found, rename the target to fhiclcpp::standalone
+  add_library(fhiclcpp::standalone ALIAS fhiclcpp::fhiclcpp)
 endif()
 
 ###### Compiler set up
