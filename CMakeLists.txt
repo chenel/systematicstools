@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 
 find_program(CMAKE_C_COMPILER NAMES $ENV{CC} gcc PATHS ENV PATH NO_DEFAULT_PATH)
 find_program(CMAKE_CXX_COMPILER NAMES $ENV{CXX} g++ PATHS ENV PATH NO_DEFAULT_PATH)
 
 set(CMAKE_CXX_STANDARD 17)
 
-project(systematicstools VERSION 23.06 LANGUAGES CXX)
+project(systematicstools VERSION 23.11 LANGUAGES CXX)
 
 #Changes default install path to be a subdirectory of the build dir.
 #Can set build dir at configure time with -DCMAKE_INSTALL_PREFIX=/install/path
@@ -24,12 +24,21 @@ LIST(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 include(CPM)
 
 find_package(ROOT 6.10 REQUIRED)
-find_package(fhiclcpp 4.17.01 REQUIRED)
+
+## Check if we have fhiclcpp from ups
+find_package(fhiclcpp QUIET)
+if(NOT fhiclcpp_FOUND)
+  ## Find fhicl_cpp_standalone
+  find_package(fhiclcppstandalone)
+else()
+  ## If found, rename the target to fhiclcpp::standalone
+  add_library(fhiclcpp::standalone ALIAS fhiclcpp::fhiclcpp)
+endif()
 
 ###### Compiler set up
 add_library(systematicstools_dependencies INTERFACE)
 target_link_libraries(systematicstools_dependencies INTERFACE 
-  fhiclcpp::fhiclcpp)
+  fhiclcpp::standalone)
 target_include_directories(systematicstools_dependencies INTERFACE 
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
   $<INSTALL_INTERFACE:include> )
