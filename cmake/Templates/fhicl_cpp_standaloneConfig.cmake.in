@@ -1,6 +1,6 @@
 @PACKAGE_INIT@
 
-set(fhicl_cpp_standalone_VERSION @PROJECT_VERSION@)
+set(fhicl_cpp_standalone_VERSION ${FHICLCPP_SUITE_VERSION_DOT})
 
 include(CMakeFindDependencyMacro)
 

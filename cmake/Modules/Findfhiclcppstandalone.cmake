@@ -19,8 +19,6 @@ cmake_minimum_required(VERSION 3.20.0 FATAL_ERROR)
 set(FHICLCPP_SUITE_VERSION 4_18_01)
 string(REPLACE "_" "." FHICLCPP_SUITE_VERSION_DOT ${FHICLCPP_SUITE_VERSION})
 
-project(fhicl_cpp_standalone VERSION ${FHICLCPP_SUITE_VERSION_DOT})
-
 set(CMAKE_CXX_STANDARD 17)
 set(CXX_STANDARD_REQUIRED ON)
 
@@ -48,7 +46,6 @@ endif()
 find_package(Boost 1.75 COMPONENTS filesystem REQUIRED)
 find_package(SQLite3 3 REQUIRED)
 find_package(TBB 2020 REQUIRED)
-
 
 set(PACKAGES cetlib-except hep-concurrency cetlib fhicl-cpp)
 
@@ -114,7 +111,7 @@ install(TARGETS fhicl_cpp_standalone
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
     "${PROJECT_BINARY_DIR}/fhicl_cpp_standaloneConfigVersion.cmake"
-    VERSION ${PROJECT_VERSION}
+    VERSION ${FHICLCPP_SUITE_VERSION_DOT}
     COMPATIBILITY AnyNewerVersion
 )
 configure_package_config_file(
@@ -134,8 +131,6 @@ install(FILES "${PROJECT_BINARY_DIR}/fhicl_cpp_standaloneConfigVersion.cmake"
 configure_file(${CMAKE_CURRENT_LIST_DIR}/../../cmake/Templates/setup.fhicl_cpp_standalone.sh.in 
   ${PROJECT_BINARY_DIR}/setup.fhicl_cpp_standalone.sh @ONLY)
 install(PROGRAMS ${PROJECT_BINARY_DIR}/setup.fhicl_cpp_standalone.sh DESTINATION bin)
-
-
 
 if(TESTS_ENABLED)
   add_executable(testfhiclcppstandalone testfhiclcppstandalone.cxx)
