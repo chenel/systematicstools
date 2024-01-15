@@ -25,12 +25,15 @@ include(CPM)
 
 find_package(ROOT 6.10 REQUIRED)
 
-CPMFindPackage(
-    NAME fhicl_cpp_standalone
-    GIT_TAG develop
-    VERSION 4.18.01
-    GITHUB_REPOSITORY luketpickering/fhicl-cpp-standalone
-)
+## Check if we have fhiclcpp from ups
+find_package(fhiclcpp QUIET)
+if(NOT fhiclcpp_FOUND)
+  ## Find fhicl_cpp_standalone
+  find_package(fhiclcppstandalone)
+else()
+  ## If found, rename the target to fhiclcpp::standalone
+  add_library(fhiclcpp::standalone ALIAS fhiclcpp::fhiclcpp)
+endif()
 
 ###### Compiler set up
 add_library(systematicstools_dependencies INTERFACE)
