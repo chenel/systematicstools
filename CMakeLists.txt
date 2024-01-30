@@ -1,11 +1,8 @@
 cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 
-find_program(CMAKE_C_COMPILER NAMES $ENV{CC} gcc PATHS ENV PATH NO_DEFAULT_PATH)
-find_program(CMAKE_CXX_COMPILER NAMES $ENV{CXX} g++ PATHS ENV PATH NO_DEFAULT_PATH)
+project(systematicstools VERSION 02.00.00 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
-
-project(systematicstools VERSION 24.01 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ Standard to use when compiling")
 
 #Changes default install path to be a subdirectory of the build dir.
 #Can set build dir at configure time with -DCMAKE_INSTALL_PREFIX=/install/path
@@ -19,6 +16,11 @@ endif()
 if(CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE DebWithRelInfo)
 endif()
+
+message(STATUS "INFO: CMAKE_C_COMPILER ${CMAKE_C_COMPILER}")
+message(STATUS "INFO: CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER}")
+message(STATUS "INFO: CMAKE_CXX_STANDARD ${CMAKE_CXX_STANDARD}")
+message(STATUS "INFO: CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}")
 
 LIST(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 include(CPM)
