@@ -19,7 +19,6 @@ cmake_minimum_required(VERSION 3.20.0 FATAL_ERROR)
 set(FHICLCPP_SUITE_VERSION 4_18_01)
 string(REPLACE "_" "." FHICLCPP_SUITE_VERSION_DOT ${FHICLCPP_SUITE_VERSION})
 
-set(CMAKE_CXX_STANDARD 17)
 set(CXX_STANDARD_REQUIRED ON)
 
 #Changes default install path to be a subdirectory of the build dir.
