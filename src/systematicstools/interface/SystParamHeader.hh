@@ -55,7 +55,7 @@ struct SystParamHeader {
         differsEventByEvent{true}, centralParamValue{kDefaultDouble},
         isCorrection{false}, oneSigmaShifts{{kDefaultDouble, kDefaultDouble}},
         paramValidityRange{{kDefaultDouble, kDefaultDouble}},
-        isSplineable{false}, isRandomlyThrown{false}, paramVariations{},
+        isSplineable{true}, isRandomlyThrown{false}, paramVariations{},
         isResponselessParam{false}, responseParamId{kParamUnhandled<paramId_t>},
         responses{}, opts{} {}
 
